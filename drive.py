@@ -1,5 +1,6 @@
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
+from notifypy import Notify
 
 """
 gauth = GoogleAuth()
@@ -25,12 +26,17 @@ class DriveApi:
         self.drive = GoogleDrive(gauth)
         print('succesfull login')
     
-    def upload_file(self,filename):
+    def upload_file(self,filename, path):
         print('uploading file...')
         new_file = self.drive.CreateFile({'title' : filename })
-        new_file.SetContentFile(filename)
+        new_file.SetContentFile(path)
         new_file.Upload()
-        print('file uploaded succesfully')
 
-drive_api = DriveApi()
-drive_api.upload_file('main.py')
+        notify = Notify(
+            default_notification_title=f'Nuevo archivo creado',
+            default_notification_message=f'Se subio {filename} a la nube'
+            ).send()
+        print('File uploaded succesfully')
+
+#drive_api = DriveApi()
+#drive_api.upload_file('main.py')

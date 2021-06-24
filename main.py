@@ -4,18 +4,20 @@ from watchdog.events import FileSystemEventHandler
 import os
 import time
 from pathlib import Path
+from drive import DriveApi
 
 FOLDER_DIR = str(Path.home())+'/Escritorio/event_handler_test/'
 file_type = ['directorio', 'archivo']
 class MyHandler(FileSystemEventHandler):
+    def __init__(self):
+        self.drive = DriveApi()
+
     def on_created(self, event):
         tipo = self.get_type(event)
-        name = self.get_name(event)
+        file_name = self.get_name(event)
+        file_path = event.src_path
 
-        notify = Notify(
-            default_notification_title=f'Nuevo {tipo} creado',
-            default_notification_message=f'Se creo un {tipo} nuevo: {name}'
-            ).send()
+        self.drive.upload_file(file_name,file_path)
 
     def on_deleted(self, event):
         tipo = self.get_type(event)
