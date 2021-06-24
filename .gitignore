@@ -1,3 +1,9 @@
 venv
 
 chromedriver
+
+*.txt
+
+*.json
+
+*.yaml
