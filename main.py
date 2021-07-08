@@ -6,12 +6,13 @@ import time
 from pathlib import Path
 from drive import DriveApi
 
-FOLDER_DIR = str(Path.home())+'/Escritorio/event_handler_test/'
+FOLDER_DIR = str(Path.home())+'/Escritorio/GoogleDrive/'
 file_type = ['directorio', 'archivo']
 class MyHandler(FileSystemEventHandler):
     def __init__(self):
         self.drive = DriveApi()
 
+    #file added to folder
     def on_created(self, event):
         tipo = self.get_type(event)
         file_name = self.get_name(event)
@@ -19,14 +20,13 @@ class MyHandler(FileSystemEventHandler):
 
         self.drive.upload_file(file_name,file_path)
 
+    #file deleted from folder
     def on_deleted(self, event):
         tipo = self.get_type(event)
-        name = self.get_name(event)
+        file_name = self.get_name(event)
 
-        notify = Notify(
-            default_notification_title=f'{tipo} Borrado',
-            default_notification_message=f'Se borro un {tipo}: {name}'
-        ).send()
+        self.drive.delete_file(file_name)
+
     
     def get_type(self, event):
         if event.is_directory:
