@@ -1,6 +1,5 @@
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
-from pydrive.drive import GoogleDriveFile
 from notifypy import Notify
 
 class DriveApi:
@@ -62,13 +61,9 @@ class DriveApi:
                 return file['id']
 
 
+""" Use this for testing DriveApi methods
 
 if __name__=='__main__':
+    #your testing code goes here
 
-    drive_api = DriveApi()
-    file_list = drive_api.list_files()
-    #print(file_list[0].keys())
-    for file in file_list:
-        print(file['title'])
-        print(file['id'])
-        print(file['parents'][0]['isRoot'])
+"""
