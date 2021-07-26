@@ -2,7 +2,7 @@ venv
 
 chromedriver
 
-mycreds*.txt
+mycreds.txt
 
 *.json
 
