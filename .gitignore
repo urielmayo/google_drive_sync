@@ -3,6 +3,7 @@ venv
 chromedriver
 
 mycreds.txt
+folderpath.txt
 
 *.json
 

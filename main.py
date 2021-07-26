@@ -1,4 +1,3 @@
-from notifypy import Notify
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import os
@@ -6,7 +5,7 @@ import time
 from pathlib import Path
 from drive import DriveApi
 
-FOLDER_DIR = str(Path.home())+'/Escritorio/GoogleDrive/'
+FOLDER_PATH_FILE = 'folderpath.txt'
 file_type = ['directorio', 'archivo']
 class MyHandler(FileSystemEventHandler):
     def __init__(self):
@@ -41,9 +40,13 @@ class MyHandler(FileSystemEventHandler):
 
 
 def main():
+    with open('folderpath.txt','r') as f:
+        file_dir = f.readline()
+
+    
     event_handler = MyHandler()
     observer = Observer()
-    observer.schedule(event_handler, FOLDER_DIR, recursive=True)
+    observer.schedule(event_handler, file_dir, recursive=True)
 
     observer.start()
 
@@ -53,7 +56,10 @@ def main():
     except KeyboardInterrupt:
         observer.stop()
     observer.join()
-
+    
 
 if __name__=='__main__':
-    main()
+    if FOLDER_PATH_FILE not in os.listdir('.'):
+        print('Google drive folder not created. ')
+    else:
+        main()
