@@ -16,7 +16,7 @@ python3 -m venv venv
 source venv/bin/activate
 pip3 install -r requirements.txt
 ```
-3. Setup Google Drive folder in "main.py" (default is Desktop/GoogleDrive)
+3. Setup Google Drive folder in "setup.py"
 4. Run main.py
 
 Your Done
