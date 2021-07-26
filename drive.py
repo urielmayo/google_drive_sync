@@ -2,12 +2,12 @@ from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 from notifypy import Notify
 
+DRIVE_ICON_PATH = './Google_Drive_logo.png'
 class DriveApi:
 
     def __init__(self):
         self.gauth = GoogleAuth()
         self.gauth.LoadCredentialsFile("mycreds.txt")
-
         if self.gauth.credentials is None:
             # Authenticate if they're not there
             self.gauth.LocalWebserverAuth()
@@ -17,6 +17,7 @@ class DriveApi:
         else:
             # Initialize the saved creds
             self.gauth.Authorize()
+        
         # Save the current credentials to a file
         self.gauth.SaveCredentialsFile("mycreds.txt")
 
@@ -31,7 +32,8 @@ class DriveApi:
 
         notify = Notify(
             default_notification_title=f'Nuevo archivo creado',
-            default_notification_message=f'Se subio {file_name} a la nube'
+            default_notification_message=f'Se subio {file_name} a la nube',
+            default_notification_icon= DRIVE_ICON_PATH
             ).send()
         print('File uploaded succesfully')
     
@@ -43,7 +45,8 @@ class DriveApi:
 
         notify = Notify(
             default_notification_title=f'Archivo Borrado',
-            default_notification_message=f'Se borro {file_name} de la nube'
+            default_notification_message=f'Se borro {file_name} de la nube',
+            default_notification_icon= DRIVE_ICON_PATH
             ).send()
         print('File deleted succesfully')
         

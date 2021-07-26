@@ -14,20 +14,22 @@ class MyHandler(FileSystemEventHandler):
 
     #file added to folder
     def on_created(self, event):
+        """function called when file is created"""
         tipo = self.get_type(event)
         file_name = self.get_name(event)
         file_path = event.src_path
 
         self.drive.upload_file(file_name,file_path)
+        
 
     #file deleted from folder
     def on_deleted(self, event):
+        """function called if file is deleted"""
         tipo = self.get_type(event)
         file_name = self.get_name(event)
 
         self.drive.delete_file(file_name)
-
-    
+        
     def get_type(self, event):
         if event.is_directory:
             return file_type[0]
