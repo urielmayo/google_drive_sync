@@ -31,8 +31,8 @@ class DriveApi:
         new_file.Upload()
 
         notify = Notify(
-            default_notification_title=f'Nuevo archivo creado',
-            default_notification_message=f'Se subio {file_name} a la nube',
+            default_notification_title=f'New file created',
+            default_notification_message=f'{file_name} uploaded to Drive',
             default_notification_icon= DRIVE_ICON_PATH
             ).send()
         print('File uploaded succesfully')
@@ -44,8 +44,8 @@ class DriveApi:
         delete_file.Trash()
 
         notify = Notify(
-            default_notification_title=f'Archivo Borrado',
-            default_notification_message=f'Se borro {file_name} de la nube',
+            default_notification_title=f'File deleted',
+            default_notification_message=f'{file_name} deleted from Drive',
             default_notification_icon= DRIVE_ICON_PATH
             ).send()
         print('File deleted succesfully')
